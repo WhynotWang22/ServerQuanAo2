@@ -1,49 +1,74 @@
+<main >
+    <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item">Danh sách nhân viên</li>
+            <li class="breadcrumb-item"><a href="#">Thêm nhân viên</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
 
-<form class="adddata" method="post" action="" enctype="multipart/form-data" >
-    <h3>Thêm người dùng</h3>
-    <div class="mb-3">
-        <label htmlFor="inputEmail" class="form-label">Email</label>
-        <input type="text" class="form-control" name="user_email">
-    </div>
-    <div class="mb-3">
-        <label htmlFor="input_password" class="form-label">Mật khẩu</label>
-        <input type="text" class="form-control" name="user_password">
-    </div>
-    <div class="mb-3">
-        <label htmlFor="input_full_name" class="form-label">Họ tên</label>
-        <input type="text" class="form-control" name="user_full_name">
-    </div>
-    <div class="mb-3">
-        <label htmlFor="input_phone_number" class="form-label">Số điện thoại</label>
-        <input type="Number" class="form-control" name="user_phone_number" rows="4">
-    </div>
-    <div class="mb-3">
-        <label htmlFor="input_phone_number" class="form-label">Địa chỉ</label>
-        <input type="text" class="form-control" name="user_address" rows="4">
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="role" value="Admin" id="flexRadioDefault1">
-        <label class="form-check-label" for="flexRadioDefault1">
-            Admin
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="role" value="Employee" id="flexRadioDefault2" checked>
-        <label class="form-check-label" for="flexRadioDefault2">
-            Nhân viên
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="role" value="User" id="flexRadioDefault2" checked>
-        <label class="form-check-label" for="flexRadioDefault2">
-            Người dùng
-        </label>
-    </div>
-    <div class="mb-3">
-        <label for="image" class="form-label">Chọn ảnh</label>
-        <input type="file" name="avatar" class="form-control2">
-    </div>
-    <button type="submit" class="btn btn-primary">Gửi</button>
+            <div class="tile">
 
+                <h3 class="tile-title">Tạo mới nhân viên</h3>
+                <div class="tile-body">
 
-</form>
+                    <form class="row" method="post">
+                        <div class="form-group col-md-4">
+                            <label htmlFor="inputEmail" class="form-label">Email</label>
+                            <input type="text" class="form-control" name="user_email">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label htmlFor="input_password" class="form-label">Mật khẩu</label>
+                            <input type="text" class="form-control" name="user_password">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label htmlFor="input_full_name" class="form-label">Họ tên</label>
+                            <input type="text" class="form-control" name="user_full_name">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label htmlFor="input_phone_number" class="form-label">Số điện thoại</label>
+                            <input type="Number" class="form-control" name="user_phone_number" rows="4">
+                        </div>
+                        <div class="form-group  col-md-4">
+                            <label htmlFor="input_phone_number" class="form-label">Địa chỉ</label>
+                            <input type="text" class="form-control" name="user_address" rows="4">
+                        </div>
+
+                        <div style="margin-left: 30px; margin-top: 20px">
+                            <div style="margin-top: 20px; margin-left: 40px"  >
+                                <input class="form-check-input" type="radio" name="role" value="Admin" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Admin
+                                </label>
+                            </div>
+                            <div style="margin-top: 20px; margin-left: 40px" >
+                                <input class="form-check-input" type="radio" name="role" value="Employee" id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Nhân viên
+                                </label>
+                            </div>
+                            <div style="margin-top: 20px; margin-left: 40px" >
+                                <input class="form-check-input" type="radio" name="role" value="User" id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Người dùng
+                                </label>
+                            </div >
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="image" class="form-label">Chọn ảnh</label>
+                            <input type="file" name="avatar" class="form-control2">
+                        </div>
+                        <div>
+                            <button class="btn btn-save" type="submit">Lưu lại</button>
+                            <a class="btn btn-cancel" href="/">Hủy bỏ</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</main>

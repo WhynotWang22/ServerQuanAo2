@@ -1,37 +1,63 @@
-<div class="container-fluid">
+<head>
+    <title>Đăng nhập quản trị | Website quản trị v2.0</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="public/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="public/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="public/vendor/select2/select2.min.css">
+    <link rel='stylesheet' href='/stylesheets/signin.css'/>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<style>
+    .form-group input {
+        width: 400px;
+    }
+
+
+</style>
+<main>
+    <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item">Danh sách nhân viên</li>
+            <li class="breadcrumb-item"><a href="#">Thêm nhân viên</a></li>
+        </ul>
+    </div>
     <div class="row">
-        <div class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Thêm sản phẩm</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="col-12" id="headerlist">
-                        <div class="btnaddbanner">
-                            <a href="/pro/list" class="btn btn-primary">Danh sách</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-md-12">
+
+            <div class="tile">
+
+                <h3 class="tile-title">Tạo mới nhân viên</h3>
+                <div class="tile-body">
                     {{#if msg}}
                         <p class="text-danger">{{{msg}}}</p>
                     {{/if}}
-                    <form action="#" id="uploadForm" method="post" enctype="multipart/form-data" style="margin-bottom: 50px">
-                        <div class="mb-3">
-                            <input type="text" class="form-control" name="title" placeholder="Tên" required="" />
-
+                    <form class="row" method="post">
+                        <div class="form-group col-md-4">
+                            <label htmlFor="inputEmail" class="form-label">Name</label>
+                            <input type="text" class="form-control" name="title" placeholder="Tên" required=""/>
                         </div>
-                        <div class="mb-3">
-                            <input type="number" class="form-control" name="price" placeholder="Giá" required="" />
-
+                        <div class="form-group col-md-4">
+                            <label htmlFor="input_password" class="form-label">Price</label>
+                            <input type="number" class="form-control" name="price" placeholder="Giá" required=""/>
                         </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" name="desc" placeholder="Mô tả" required="" />
-
+                        <div class="form-group col-md-4">
+                            <label htmlFor="input_full_name" class="form-label">Mô tả</label>
+                            <input type="text" class="form-control" name="desc" placeholder="Mô tả" required=""/>
                         </div>
-
-                        <div class="mb-3">
-
-                            <select class="form-control form-control-sm" id="select_category" Name="cate"style="width: 250px; height: 50px;" onchange="select();">
-                                <option > Chọn loại </option>
+                        <div class="form-group  col-md-4">
+                            <label for="exampleFormControlInput1" class="form-label">Chọn loại</label>
+                            <select class="form-control form-control-sm" id="select_category" Name="cate"
+                                    style="width: 400px; height: 50px;" onchange="select();">
+                                <option> Chọn loại</option>
                                 {{#each listCate}}
 
                                     <option value="{{this.title}}"> {{this.title}}  </option>
@@ -39,67 +65,46 @@
                             </select>
 
                         </div>
-                        <label for="exampleFormControlInput1" class="form-label">Chọn size</label>
-                        <div>
-                            <select class="form-control form-control-sm" id="select_size"  size="{{sizeLength}}" Name="sizes"style="width: 250px;" onchange="select();" multiple>
+
+                        <div class="form-group  col-md-4">
+                            <label for="exampleFormControlInput1" class="form-label">Chọn size</label>
+                            <select class="form-control form-control-sm" id="select_size" size="{{sizeLength}}"
+                                    Name="sizes" style="width: 400px;" onchange="select();" multiple>
                                 {{#each listSize}}
 
                                     <option value="{{this}}"> {{this}}  </option>
                                 {{/each}}
                             </select>
                         </div>
-                        <br/>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" name="color" placeholder="Màu" required="" />
+
+                        <div class="form-group  col-md-4">
+                            <label htmlFor="input_phone_number" class="form-label"> chọn Màu</label>
+                            < <input type="text" class="form-control" name="color" placeholder="Màu" required=""/>
+                        </div>
+                        <div class="form-group  col-md-4">
+                            <label htmlFor="input_phone_number" class="form-label">Số lượng</label>
+
+                            <input type="text" class="form-control" name="stock" placeholder="Số lượng" required=""/>
 
                         </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" name="stock" placeholder="Số lượng" required="" />
-
-                        </div>
-                        <div class="mb-3">
-                            <input type="file" name="img" placeholder="img " required=""  multiple/>
-                            <span id = "status"></span>
+                        <div class="form-group  col-md-4" style="margin-top: 30px">
+                            <input type="file" name="img" placeholder="img " required="" multiple/>
+                            <span id="status"></span>
                         </div>
                         <div class="clear"></div>
-                        <div class="submit-w3l">
-                            <Button type="submit" class="btn btn-primary">Thêm</Button>
+
+                        <div class="form-group  col-md-4" style="margin-top: 30px">
+
+                            <button class="btn btn-save" type="submit">Lưu lại</button>
+                            <a class="btn btn-cancel" href="/">Hủy bỏ</a>
                         </div>
+
+
                     </form>
                 </div>
             </div>
         </div>
+
     </div>
-</div>
-<script>
-    // $(document).ready(function() {
-    //     // Multiple images preview in browser - trungquandev.com
-    //     let imagesPreview = function(input, placeToInsertImagePreview) {
-    //         if (input.files) {
-    //             let filesAmount = input.files.length;
-    //             for (i = 0; i < filesAmount; i++) {
-    //                 let reader = new FileReader();
-    //                 reader.onload = function(event) {
-    //                     $($.parseHTML("<img>")).attr("src", event.target.result).appendTo(placeToInsertImagePreview);
-    //                 }
-    //                 reader.readAsDataURL(input.files[i]);
-    //             }
-    //         }
-    //     };
-    //     $("#input-many-files").on("change", function() {
-    //         imagesPreview(this, "div.preview-images");
-    //     });
-    // });
- // function select() {
- //     // let element   = $('#select_category').val();
- //     // let value = request.form("cate").toString();
- //     // console.log(element);
- //     const anh_manga = document.querySelector('#select_category');
- //     const reader = new select();
- //     reader.addEventListener("load", function () {
- //
- //         preview.src = reader.result;
- //         anh_manga.value = reader.result;
- //     }, false);
- // }
-</script>
+
+</main>

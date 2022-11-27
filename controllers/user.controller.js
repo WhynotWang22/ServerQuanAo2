@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 const fs = require('fs');
 const {streamUpload} =require('../utils/UploadIMG');
 const IMGModel = require("../models/Img.model");
+const layout =require('chart.js')
+
 //hien thi danh sach User
 exports.getListUSer=async(req,res,next)=>{
     var listUser = await UserModel.find({role:"User"});

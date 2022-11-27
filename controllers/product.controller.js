@@ -29,7 +29,7 @@ exports.getFormAddPro = async (req, res, next) => {
 }
 exports.postAddPro = async (req, res, next) => {
 
-    let result = await streamUpload(req);
+    let result = await streamUpload(req.file);
     let filename= result.url;
     const product = new productModel({
         title: req.body.title,

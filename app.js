@@ -29,6 +29,7 @@ var apiOrderRouter =require('./routes/api.order');
 var notiRouter =require('./routes/noti');
 var apiNotiRouter =require('./routes/api.noti');
 var apiAddressRouter =require('./routes/api.address');
+const {layouts} = require("chart.js");
 
 
 var app = express();
@@ -47,7 +48,7 @@ app.use(session({
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+app.set('view engine', 'hbs')
 app.use(bodyparser.urlencoded({extended:true}))
 app.use(logger('dev'));
 app.use(express.json({limit: '50mb'}));
