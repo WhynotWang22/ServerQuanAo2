@@ -10,7 +10,7 @@ router.get('/filterAmountByWeek',thongKeController.getFilterWeek);
 //get month
 router.get('/filterAmountByMonth',thongKeController.getDaysinmonht);
 //get year (not done)
-router.get('/filterAmountMonthtoYear',thongKeController.getMonthsInYear);
+router.get('/filterAmountMonthtoYear',thongKeController.getFilterMonthtoYear);
 
 router.get('/tong',thongKeController.getfilterIncome);
 

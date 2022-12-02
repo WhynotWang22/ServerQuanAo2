@@ -167,36 +167,117 @@ exports.getMonthsInYear = async (req,res)=>{
 }
 
 exports.getFilterMonthtoYear =async (req,res)=>{
-    var months = ["jan", "feb", "mar", "apr", "may", "jun", "july", "aug", "sep", "oct", "nov", "dec"];
+    const TODAY = moment().toDate();
+   const FIRST_MONTH = 1;
 
-    var date = new Date();
-    var month = date.getMonth(); // returns 0 - 11
+   const LAST_MONTH  = 12;
+    const MONTHS_ARRAY = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ]
+    const startOfYear = moment().startOf('year').subtract(-1,"day").toDate();
+    console.log(startOfYear);
+    const lastDayOfYear = moment().endOf('year').toDate()
 
-    var year = date.getFullYear();
-
-    console.log(months[month]);
-
-    console.log(year);
-    let days = await OrderModel.aggregate([
-        { $match: { createdAt: { $gt: months[0],$lt:months[11] } } },
+    //query
+    const allMonthsData = await OrderModel.aggregate([
         {
-            $group: {
-                _id: {
-                    month: { $month: {date:"$createdAt"} },
-                },
-                total: {$sum:"$Total"}
+            $match:{
+                createdAt:{$gt:startOfYear,$lt:lastDayOfYear}
             }
         },
         {
-            $group: {
-                _id: "$_id",
-                count: { $push: { total: "$total" } }
+            $group:{
+                _id:{"year_month":{$substrCP:[ "$createdAt", 0, 7 ]}},
+                count:{$sum:"$Total"}
             }
         },
-        {$sort:{_id:1}}
+        {
+            $sort: {"_id.year_month": 1}
+        },
+        {
+            $project:{
+                _id: 0,
+                count: 1,
+                month_year:{
+                    $concat:[
+                        {$arrayElemAt:[MONTHS_ARRAY,{$subtract:[{$toInt:{$substrCP:[ "$_id.year_month", 5, 2 ]}},1]}]},
+                        "-",
+                        {$substrCP:["$_id.year_month",0,4]}
+
+                    ]
+                }
+            }
+        },
+        {
+            $group:{
+                _id:null,
+                data:{$push:{ k: "$month_year", v: "$count" }}
+            }
+        },
+        {
+            $addFields: {
+                start_year: { $substrCP: [ startOfYear, 0, 4 ] },
+                end_year: { $substrCP: [ TODAY, 0, 4 ] },
+                months1: { $range: [ { $toInt: { $substrCP: [ startOfYear, 5, 2 ] } }, { $add: [ LAST_MONTH, 1 ] } ] },
+                months2: { $range: [ FIRST_MONTH, { $add: [ { $toInt: { $substrCP: [ TODAY, 5, 2 ] } }, 1 ] } ] }
+            }
+        },
+        {
+            $addFields: {
+                template_data: {
+                    $concatArrays: [
+                        { $map: {
+                                input: "$months1", as: "m1",
+                                in: {
+                                    count: 0,
+                                    month_year: {
+                                        $concat: [ { $arrayElemAt: [ MONTHS_ARRAY, { $subtract: [ "$$m1", 1 ] } ] }, "-",  "$start_year" ]
+                                    }
+                                }
+                            } },
+                        { $map: {
+                                input: "$months2", as: "m2",
+                                in: {
+                                    count: 0,
+                                    month_year: {
+                                        $concat: [ { $arrayElemAt: [ MONTHS_ARRAY, { $subtract: [ "$$m2", 1 ] } ] }, "-",  "$end_year" ]
+                                    }
+                                }
+                            } }
+                    ]
+                }
+            }
+        },
+        {
+            $addFields: {
+                data: {
+                    $map: {
+                        input: "$template_data", as: "t",
+                        in: {
+                            k: "$$t.month_year",
+                            v: {
+                                $reduce: {
+                                    input: "$data", initialValue: 0,
+                                    in: {
+                                        $cond: [ { $eq: [ "$$t.month_year", "$$this.k"] },
+                                            { $add: [ "$$this.v", "$$value" ] },
+                                            { $add: [ 0, "$$value" ] }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            $project: {
+                data: { $arrayToObject: "$data" },
+                _id: 0
+            }
+        }
+
     ])
-    console.log(days);
-    res.json(days)
+    res.json({YearTomonth:allMonthsData})
 }
 
 

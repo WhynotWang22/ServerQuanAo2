@@ -158,7 +158,7 @@
                 function updateChartYear(){
 
                     async function fetchData (){
-                        const url = 'https://mofshop.shop/thongke/filterAmountMonthtoYear'
+                        const url = 'http://localhost:3000/thongke/filterAmountMonthtoYear'
                         const response = await fetch(url);
                         // chờ khi req completed
                         const datapoints =await response.json();
@@ -167,15 +167,12 @@
                         return datapoints;
                     }
                     fetchData().then(datapoints=>{
-                        const date = datapoints.MonthOfYear.map(function (index){
-                            return "tháng "+index._id.month
-                        });
-                        const date1 = datapoints.MonthOfYear.map(function (index){
-                            return index.count[0].total
+                        const date = datapoints.YearTomonth.data.map(function (index){
+                            return index;
                         });
 
-                        myChart.config.data.labels = date;
-                        myChart.config.data.datasets[0].data = date1;
+                        myChart.config.data.labels = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+                        myChart.config.data.datasets[0].data = date
                         myChart.config.data.datasets[0].label = "Thống kê theo tháng trong năm ";
                         myChart.update();
                     })
@@ -185,7 +182,7 @@
                 function updateChart(){
 
                     async function fetchData (){
-                        const url = 'https://mofshop.shop/thongke/filterAmountByMonth'
+                        const url = 'http://localhost:3000/thongke/filterAmountByMonth'
                         const response = await fetch(url);
                         // chờ khi req completed
                         const datapoints =await response.json();
@@ -215,7 +212,7 @@
                 function updateChartWeek(){
 
                     async function fetchData (){
-                        const url = 'https://mofshop.shop/thongke/filterAmountByWeek'
+                        const url = 'http://localhost:3000/thongke/filterAmountByWeek'
                         const response = await fetch(url);
                         // chờ khi req completed
                         const datapoints =await response.json();

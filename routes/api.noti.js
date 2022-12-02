@@ -6,6 +6,6 @@ const auth = require("../middleware/api.auth.middleware");
 const upload =multer();
 
 // router.get('/getall',apiNoti.getAllNoti);
-router.get('/getAll',auth, apiNoti.GetAllNotiByUser);
+router.get('/getAll',auth, apiNoti.getAllNoti);
 
 module.exports = router;
